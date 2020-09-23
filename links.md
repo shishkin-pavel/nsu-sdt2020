@@ -20,7 +20,7 @@
   https://youtu.be/drmNlZVkUeE
 
 * N:M параллелизм
-  * Go, coroutines implementation details https://youtu.be/-K11rY57K7k?list=PLC5OGTO4dWxYuuASJMj1xePLQjNg05HzT (тут закрытый плейлист конференции hydra 2019 года, много интересного хардкора)
+  * Go, coroutines implementation details https://youtu.be/-K11rY57K7k
   * F# + general discussion https://youtu.be/X2AYct_oSP4 
 
 # Software engineering ideas
