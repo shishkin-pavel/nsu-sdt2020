@@ -43,3 +43,10 @@
 
 
 (-main `(10 20 50))
+
+
+(defn inc-coll-1 [coll]
+  (if (> (count coll) 0)
+    (cons (inc (first coll))
+          (inc-coll-1 (rest coll)))
+    (list)))
