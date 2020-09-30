@@ -1,3 +1,6 @@
+; lein new app lab1
+; cd lab1
+; code .
 ; ctrl+alt+c ctrl+alt+j
 ; ctrl+shift+p
 (ns test.core
