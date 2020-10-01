@@ -1,52 +1,30 @@
-; ctrl+alt+c ctrl+alt+j
-; ctrl+shift+p
-(ns test.core
+(ns lab1.core
   (:gen-class))
 
-(defn cls
-  [n]
-  (do
-    (if (> n 0)
-      (do
-        (println "")
-        (cls (dec n)))
-      0)))
+(defn -main
+  "I don't do a whole lot ... yet."
+  [& args]
+  (println "Hello, World!"))
 
-(defn my-map
-  [f arr]
-  (let [arr-f (first arr)]
-    (if arr-f
-      (do
-        (f arr-f)
-        (my-map f (rest arr))))))
+(defn my-map [f data]
+  (reduce #(conj %1 (f %2))
+          []
+          data))
 
-(defn my-sqr
-  [x]
-  (* x x))
+(defn my-filter [f data]
+  (reduce #(
+            (do
+              (println "%1" %1)
+              (println "%2" %2)
+              (if true ;(f %2)
+                  (conj %1 %2)
+                  (%1))))
+          []
+          data))
 
-(defn -main [& arg1]
-  (do
-    (cls 10)
-
-    (println "let a")
-    (let [a '(10 20 30)]
-      (println a)
-
-      (println "map")
-      (map my-sqr a)
-
-      (println "my-map")
-      (my-map my-sqr a)
-    )
-  )
-)
+;;(println (my-map #(* %1 %1) '(2 4 3)))
+;;(println (my-map even? '(2 4 3)))
+(println "my-filter")
+(println (my-filter even? (range 1 10)))
 
 
-(-main `(10 20 50))
-
-
-(defn inc-coll-1 [coll]
-  (if (> (count coll) 0)
-    (cons (inc (first coll))
-          (inc-coll-1 (rest coll)))
-    (list)))
