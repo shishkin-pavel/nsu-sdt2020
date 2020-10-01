@@ -16,7 +16,7 @@
             (do
               (println "%1" %1)
               (println "%2" %2)
-              (if true ;(f %2)
+              (if (f %2)
                   (conj %1 %2)
                   (%1))))
           []
