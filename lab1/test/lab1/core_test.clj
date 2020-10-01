@@ -17,3 +17,11 @@
     (is (= (lab1.task2/task2 `("a" "b" "c") 1) `("a" "b" "c")))
     (is (= (lab1.task2/task2 `("a" "b" "c") 2) `("ab" "ac" "ba" "bc" "ca" "cb")))
     (is (= (lab1.task2/task2 `("a" "b" "c") 3) `("aba" "abc" "aca" "acb" "bab" "bac" "bca" "bcb" "cab" "cac" "cba" "cbc")))))
+
+(deftest task4-test
+  (testing "task4"
+    (is (= (lab1.task4/task4 `() 1) `()))
+    (is (= (lab1.task4/task4 `("a" "b" "c") 0) `()))
+    (is (= (lab1.task4/task4 `("a" "b" "c") 1) `("a" "b" "c")))
+    (is (= (lab1.task4/task4 `("a" "b" "c") 2) `("ab" "ac" "ba" "bc" "ca" "cb")))
+    (is (= (lab1.task4/task4 `("a" "b" "c") 3) `("aba" "abc" "aca" "acb" "bab" "bac" "bca" "bcb" "cab" "cac" "cba" "cbc")))))
