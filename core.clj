@@ -27,4 +27,12 @@
 (println "my-filter")
 (println (my-filter even? (range 1 10)))
 
+my-filter
+%1 []
+%2 1
+; Syntax error (ArityException) compiling at (c:\home\koshi8bit\lab1\src\lab1\core.clj:28:1).
+; Wrong number of args (0) passed to: clojure.lang.PersistentVector
+; Evaluation of file core.clj failed: class clojure.lang.Compiler$CompilerException
+
+
 
