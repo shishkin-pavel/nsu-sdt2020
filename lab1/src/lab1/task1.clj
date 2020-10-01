@@ -7,14 +7,14 @@
             (concat
                 (list (str c (first xs)))
                 (add-char c (rest xs))))
-        (list)))
+        xs))
 
 (defn concat-string-list [xs ys]
     (if (> (count xs) 0) 
         (concat
             (add-char (first xs) ys)
             (concat-string-list (rest xs) ys))
-        (list)))
+        xs))
 
 (defn task1
     ([xs n] 
