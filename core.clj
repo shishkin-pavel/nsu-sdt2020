@@ -12,13 +12,13 @@
           data))
 
 (defn my-filter [f data]
-  (reduce #(
+  (reduce (fn [a b]
             (do
-              (println "%1" %1)
-              (println "%2" %2)
-              (if (f %2)
-                  (conj %1 %2)
-                  %1)))
+              (println "a" a)
+              (println "b" b)
+              (if (f b)
+                  (conj a b)
+                  a)))
           []
           data))
 
