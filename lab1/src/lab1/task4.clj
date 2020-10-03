@@ -1,10 +1,10 @@
 (ns lab1.task4)
 
 (defn filter-first [c xs]
-    (filter (fn [s] (not= c (.substring s 0 1))) xs))
+    (filter (fn [s] (not= c s)) xs))
 
 (defn add-char-map [c xs]
-    (map (fn [ys] (str c ys)) (filter-first c xs)))
+    (map (fn [ys] (list c ys)) (filter-first c xs)))
 
 (defn concat-string-list-map [xs ys]
     (reduce concat `() (map (fn [c] (add-char-map c ys)) xs)))

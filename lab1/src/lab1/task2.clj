@@ -5,9 +5,9 @@
     ([c xs acc]
         (if (= (count xs) 0)
             acc
-            (if (= c (.substring (first xs) 0 1))
+            (if (= c (first xs))
                 (recur c (rest xs) acc)
-                (recur c (rest xs) (concat acc (list (str c (first xs)))))))))
+                (recur c (rest xs) (concat acc (list (list c (first xs)))))))))
 
 (defn concat-string-list-recur 
     ([xs ys] (concat-string-list-recur xs ys (list)))

@@ -2,10 +2,10 @@
 
 (defn add-char [c xs]
     (if (> (count xs) 0)
-        (if (= c (.substring (first xs) 0 1))
+        (if (= c (first xs))
             (add-char c (rest xs))
             (concat
-                (list (str c (first xs)))
+                (list (list c (first xs)))
                 (add-char c (rest xs))))
         xs))
 
