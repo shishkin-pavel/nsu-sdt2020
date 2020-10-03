@@ -27,4 +27,6 @@
 ; po4emu tolko so strokami robit
 (println (permutation '("1" "2" "3") 2))
 
+(#(println %1 %&) '(1 2 3) '(4 5) '(6 7))
+
 
