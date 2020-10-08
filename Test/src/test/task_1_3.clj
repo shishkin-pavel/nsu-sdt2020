@@ -1,4 +1,4 @@
-(ns test.task_3)
+(ns test.task_1_3)
 
 (defn my-map [f coll]
   (reduce #(conj %1 (f %2)) [] coll))
