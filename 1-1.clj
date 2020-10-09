@@ -29,3 +29,7 @@
 (println "f1 a" (f1 '() '(:a :b :c)))      ;((a) (b) (c))
 (println "f1 b" (f1 '(:a) '(:a :b :c)))    ;((b a) (c a))
 (println "f2" (f2 '(:a :b) '(:a :b :c)))   ;((b a) (c a) (a b) (c b))
+
+; Syntax error (IllegalArgumentException) compiling at (c:\home\koshi8bit\lab1\src\lab1\core.clj:30:44).
+; Don't know how to create ISeq from: clojure.lang.Keyword
+; Evaluation of file core.clj failed: class clojure.lang.Compiler$CompilerException
