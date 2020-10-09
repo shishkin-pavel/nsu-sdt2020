@@ -2,7 +2,7 @@
   (:gen-class))
 
 (defn f1 [w alph]
-    (println "f1" w alph)
+    ;(println "f1" w alph)
     (if (empty? alph)
         '()
         (if (not= (first w) (first alph))
@@ -13,7 +13,7 @@
     )
 )
 (defn f2 [w alph]
-    (println "f2" w alph)
+    ;(println "f2" w alph)
     (if (empty? w)
         '()
         (concat
@@ -23,13 +23,20 @@
     )
 )
 
+(defn f3 [n alph]
+    (if (> n 1)
+        (f2
+            (f3 (dec n) alph)
+            alph
+        )
+        (f2 '(()) alph))
+)
 
 
+;(println "f1 a" (f1 '() '(:a :b :c)))      ;((a) (b) (c))
+;(println "f1 b" (f1 '(:a) '(:a :b :c)))    ;((b a) (c a))
 
-(println "f1 a" (f1 '() '(:a :b :c)))      ;((a) (b) (c))
-(println "f1 b" (f1 '(:a) '(:a :b :c)))    ;((b a) (c a))
-(println "f2" (f2 '(:a :b) '(:a :b :c)))   ;((b a) (c a) (a b) (c b))
+;(println "f2" (f2 '((:a) (:b)) '(:a :b :c)))   ;((b a) (c a) (a b) (c b))
 
-; Syntax error (IllegalArgumentException) compiling at (c:\home\koshi8bit\lab1\src\lab1\core.clj:30:44).
-; Don't know how to create ISeq from: clojure.lang.Keyword
-; Evaluation of file core.clj failed: class clojure.lang.Compiler$CompilerException
+(println "f3 a" (f3 2 '(:a :b :c)))
+(println "f3 b" (f3 2 '(:a [:b :c] "d")))
