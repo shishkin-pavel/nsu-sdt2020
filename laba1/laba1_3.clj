@@ -2,11 +2,11 @@
   (:gen-class))
 
 (defn my-map [f coll]
-  (reduce (fn [one two] (conj one (f two) )) '() (reverse coll)))
+  (reduce (fn [one two] (conj one (f two) )) [] coll))
 
 
 (defn my-filter [f coll]
-  (reduce (fn [one two] (if (f two) (conj one two) one)) '() (reverse coll) ))
+  (reduce (fn [one two] (if (f two) (conj one two) one)) [] coll ))
 
 
 (my-filter even? (range 10))
