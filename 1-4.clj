@@ -7,6 +7,6 @@
         (filter #(not= (first w) %) alph)
     )
 )
-
+(iterate inc 5)
 (println (f1 `() `(:a :b :c)))
 (println (f1 `(:a) `(:a :b :c)))
