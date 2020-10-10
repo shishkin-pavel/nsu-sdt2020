@@ -1,36 +1,40 @@
 (ns laba1-2.core
   (:gen-class))
 
-(defn make_list [word alf n_alf]
-  (loop [num n_alf res-coll (list)]
-    (let [search (cons (nth alf num) word)]
-      (if (= (first word) (nth alf num)) (if (> num 0) (recur (- num 1) res-coll) res-coll);
-        (if (= num 0) (cons search res-coll )
-            (recur (- num 1) (cons search res-coll)))))
-    )
-  )
-  
-;(make_list '() '(:a :b :c) 2) 
+(defn make_list [word alf]
+  (loop [alph alf res-coll (list)]
+    (let [search (cons (first alph) word)
+          num (count alph)]
+      (if (= (first word) (first alph)) (if (> num 1) (recur (rest alph) res-coll) res-coll);
+          (if (= num 1) (cons search res-coll)
+              (recur (rest alph) (cons search res-coll)))))))
 
-(defn multi_make_list [words alf n_alf n_words]
-  (loop [num n_words res-coll (list)]
-    (if (not= num 0) (recur (- num 1) (concat (make_list (nth words n_words) alf n_alf)  res-coll))
-        (concat  (make_list (nth words n_words) alf n_alf) res-coll) ;(concat  (make_list (nth words n_words) alf n_alf) res-coll)
+;(make_list '() '(:a :b :c)) 
+
+(defn multi_make_list [words alf]
+  (loop [l_word words res-coll (list)]
+    (let [num (count l_word)]
+      (if (not= num 1) (recur (rest l_word) (concat (make_list (first l_word) alf)  res-coll))
+        (concat  (make_list (first l_word) alf) res-coll)
         )))
+    )
 
-;(multi_make_list (list '()) '(:a :b :c) 2 0) 
+;(multi_make_list '(()) '(:a :b :c)) 
 
-(defn mix [words width alf count_width n_alf]  ; n_alf- счетчик перечисления алф count_width=1
-  (if (= count_width 1) (let [zamena (multi_make_list words alf n_alf 0)] (recur zamena width alf (+ count_width 1) n_alf))
+(defn mix [words width alf count_width]  ; n_alf- счетчик перечисления алф count_width=1
+  (if (= count_width 1) (let [zamena (multi_make_list words alf)] (recur zamena width alf (+ count_width 1)))
       (if (not= count_width width)
-        (let [zamena (multi_make_list words alf n_alf (- (count words) 1))]
-          (recur zamena width alf (+ count_width 1) n_alf))
-        (multi_make_list words alf n_alf (- (count words) 1)))))
+        (let [zamena (multi_make_list words alf)]
+          (recur zamena width alf (+ count_width 1)))
+        (multi_make_list words alf))))
 
-;(mix (list '()) 3 '(:a :b :c) 1 2); итоговая функция   (слово ширина_последовательностей алф счетчик_ширины счетчик_алфовита)
+;(mix (list '()) 3 '(:a :b :c) ); итоговая функция   (слово ширина_последовательностей алф счетчик_ширины счетчик_алфовита)
 
 (defn main [width alf]
-  (mix (list '()) width alf 1 (- (count alf) 1)))
+  (mix '(()) width alf 1))
 
 
-(main 2 '(:a :b :c))
+
+;(make_list '(:F) '(:a :b :c))
+;(multi_make_list '((:a) (:b) (:c)) '(:a :b :c))
+;(main 2 '(:a :b :c))
