@@ -4,4 +4,4 @@
   (reduce #(conj %1 (f %2)) [] coll))
 
 (defn my-filter [cond coll]
-  (reduce #(if (cond %2) (concat %1 [%2]) %1) [] coll))
+  (reduce #(if (cond %2) (conj %1 %2) %1) [] coll))
