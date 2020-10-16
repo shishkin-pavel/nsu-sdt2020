@@ -25,5 +25,7 @@
   (time (integrate-mem f 400 1))
   (time (integrate-mem f 500 1))
   (println "2")
-  (time (integrate-mem f 9 1)))
+  (time (integrate-mem f 9 1))) ; mem ok
 
+(time (integrate-mem #(* x x) 100 1) ; stack fault
+(time (integrate-mem #(* x x) 9 1))  ; not memed
