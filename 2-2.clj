@@ -72,8 +72,3 @@
 
 )
 
-
-
-;(lazy-cat (seq ["lazy-cat" "is" "my" "favorite" "function"]))
-
-
