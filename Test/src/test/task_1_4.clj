@@ -4,10 +4,13 @@
   (map #(cons %1 word) (filter #(not= (first word) %1) alph)))
 
 (defn mix [alph words]
-  (reduce concat (map #(get-pair %1 alph) words)))
+  (mapcat #(get-pair %1 alph) words))
 
-(defn my-permut [alph n]
+(defn my-permut-with-reduce [alph n]
   (reduce (fn [words _] (mix alph words)) `(()) (range n)))
 
+(defn my-permut-with-iterate [alph n]
+  (nth (iterate (partial mix alph) `(())) 3))
+
 (defn -main [& _]
-  (prn (my-permut `(:a :b "c") 3)))
+  (prn (my-permut-with-iterate `(:a :b "c") 3)))
