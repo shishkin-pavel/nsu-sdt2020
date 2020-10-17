@@ -15,6 +15,65 @@
        (integrate f prevv delta)
        (calc-trap f prevv end)))))
 
-(integrate #(* % %) 9 1)
+(let [maxx 10 delta 2]
+
+    (take (/ maxx delta)
+        (iterate #(+ % delta) 0)
+    )
+)
+
+(comment
+(let [seqq (map #(* 2 %) (range))]
+    (take 10
+        (reductions + 0
+            (map
+                #(calc-trap (fn [x] (* x x)) %1 %2)
+                seqq
+                (rest seqq)
+            )
+        )
+    )
+)
+;(->>
+;    (take 10 (map #(* 2 %) (range)))
+;    (map #(calc-trap (fn [x] (* x x)) %1 %2)
+;)
+;(take 10 (seq (range 0 4)))
+)
+
+
+
+(let [seqq (map #(* 2 %) (range))]
+
+    (def foo
+        (lazy-seq
+            (cons 1
+                (map
+                    #(calc-trap (fn [x] (* x x)) %1 %2)
+                    seqq
+                    (rest seqq)
+                )
+            )
+        )
+    )
+
+    (println "result" (take 3 (rest foo)))
+
+;    (->>
+;        (map
+;            #(calc-trap (fn [x] (* x x)) %1 %2)
+;            seqq
+;            (rest seqq)
+;        )
+;        (reductions + 0)
+;        (take 10)
+;    )
+
+
+)
+
+
+
+;(lazy-cat (seq ["lazy-cat" "is" "my" "favorite" "function"]))
 
 
