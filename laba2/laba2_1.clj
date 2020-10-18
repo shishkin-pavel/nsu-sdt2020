@@ -1,6 +1,7 @@
 (ns laba2-1.core
   (:gen-class))
 
+
 (defn mini [fun x0 x1 dx]
   (* (* (+ (fun x0) (fun x1)) 0.5) dx))
 
