@@ -2,18 +2,20 @@
   (:gen-class))
 
 (defn make_list [word alf]                  ;k - длинна алфавита n- счетчик перечисления алф
-  (let [search (cons (first alf) word)
-        num (count alf)]
-    (if (= (first word) (first alf)) (if (> num 1) (make_list word (rest alf)));вторая проверка для того что бы не уйти за грань алфавита :a :a:b:c
-      (if (= num 1) (list search)
-          (cons search (make_list word (rest alf)))))))
+  (let [num (count alf)]
+    (if (= (first word) (first alf)) 
+      (if (> num 1) (make_list word (rest alf)))
+      
+      (let [search (cons (first alf) word)]
+        (if (= num 1) (list search)
+            (cons search (make_list word (rest alf)))))))
+  )
 
 ;(make_list '() '(:a :b :c) 2) 
 
 (defn multi_make_list [words alf];n_words-начиная с конца-1 до 0  n- счетчик перечисления алф
-  (let [num (count words)]
-    (if (not= num 1) (concat (make_list (first words) alf) (multi_make_list (rest words) alf))
-      (make_list (first words) alf))))
+    (if (not= (count words) 1) (concat (make_list (first words) alf) (multi_make_list (rest words) alf))
+      (make_list (first words) alf)))
   
 
 ;(multi_make_list (list '()) '(:a :b :c) 2 0); 
