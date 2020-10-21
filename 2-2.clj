@@ -41,34 +41,48 @@
 ;(take 10 (seq (range 0 4)))
 )
 
+(defn foo [seqq f]
+    (lazy-seq
 
-
-(let [seqq (map #(* 2 %) (range))]
-
-    (def foo
-        (lazy-seq
-            (cons 1
-                (map
-                    #(calc-trap (fn [x] (* x x)) %1 %2)
-                    seqq
-                    (rest seqq)
-                )
+        (cons 0
+            (map
+                #(calc-trap f %1 %2)
+                seqq
+                (rest seqq)
             )
         )
     )
-
-    (println "result" (take 3 (rest foo)))
-
-    (->>
-        (map
-            #(calc-trap (fn [x] (* x x)) %1 %2)
-            seqq
-            (rest seqq)
-        )
-        (reductions + 0)
-        (take 10)
-    )
-
-
 )
+
+
+(def get-integrator [f begin step]
+    (let [ls (...)]
+        (fn [b]
+            (nth ls ...)))
+)
+
+
+(let [integrator (get-integrator #(+ % 0) 0 5)]
+    (time (integrator 10000))
+    (time (integrator 10015))
+    (time (integrator 09985))
+)
+
+(let [seqq (foo (map #(* 1 %) (range))(fn [x] 1))]
+    (reduce + 0 (take 10  seqq ))
+    (reduce + 0 (take 10  seqq ))
+    (reduce + 0 (take 10  seqq ))
+    (reduce + 0 (take 10  seqq ))
+    (reduce + 0 (take 10  seqq ))
+)
+;    (->>
+;        (map
+;            #(calc-trap (fn [x] (* x x)) %1 %2)
+;            seqq
+;            (rest seqq)
+;        )
+;        (reductions + 0)
+;        (take 10)
+;    )
+
 
