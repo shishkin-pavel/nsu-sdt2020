@@ -59,15 +59,15 @@
 
     (println "result" (take 3 (rest foo)))
 
-;    (->>
-;        (map
-;            #(calc-trap (fn [x] (* x x)) %1 %2)
-;            seqq
-;            (rest seqq)
-;        )
-;        (reductions + 0)
-;        (take 10)
-;    )
+    (->>
+        (map
+            #(calc-trap (fn [x] (* x x)) %1 %2)
+            seqq
+            (rest seqq)
+        )
+        (reductions + 0)
+        (take 10)
+    )
 
 
 )
