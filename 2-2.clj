@@ -35,6 +35,11 @@
     (time (integrator 10))
 )
 
+;;; Evaluating file: core.clj
+;;"Elapsed time: 0.0376 msecs"
+;;"Elapsed time: 0.0054 msecs"
+;;(0 1/2 3/2 7/2 15/2 31/2 63/2 127/2 255/2 511/2)
+
 
 ;;(let [integrator (get-integrator #(* % 1) 0 5)]
 ;;    (time (integrator 10000))
