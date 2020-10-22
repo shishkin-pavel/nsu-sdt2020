@@ -24,15 +24,20 @@
     (let [ls (iterate #(+ % (calc-trap f % (+ % step)))
                       begin)]
         (fn [k]
-            (nth ls (/ k step)
+            ;(nth ls (/ k step))
+            (take (/ k step) ls)
         )
     )
 )
 
-
-
-(let [integrator (get-integrator #(* % 1) 0 5)]
-    (time (integrator 10000))
-    (time (integrator 10015))
-    (time (integrator 09985))
+(let [integrator (get-integrator #(* % 1) 0 1)]
+    (time (integrator 10))
+    (time (integrator 10))
 )
+
+
+;;(let [integrator (get-integrator #(* % 1) 0 5)]
+;;    (time (integrator 10000))
+;;    (time (integrator 10015))
+;;    (time (integrator 09985))
+;;)
