@@ -20,20 +20,25 @@
 )
 
 
+(println ((fn [x] 1) 2))
+(println ((fn [x] 1) 100))
+
+
 (defn get-integrator [f begin step]
     (let [ls (iterate #(+ % (calc-trap f % (+ % step)))
                       begin)]
         (fn [k]
-            ;(nth ls (/ k step))
-            (take (/ k step) ls)
+            (nth ls (/ k step))
+            ;(take (/ k step) ls)
         )
     )
 )
 
-(let [integrator (get-integrator #(* % 1) 0 1)]
+(let [integrator (get-integrator (fn [x] 2) 0 1)]
     (time (integrator 10))
     (time (integrator 10))
 )
+
 
 ;;; Evaluating file: core.clj
 ;;"Elapsed time: 0.0376 msecs"
