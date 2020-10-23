@@ -1,15 +1,16 @@
 (ns lab2.core-test
+  (:use lab2.common)
   (:require [clojure.test :refer :all]
             [lab2.core :refer :all]))
 
 (deftest trapeze-area-test
   (testing "trapeze-area"
-    (is (= (lab2.task1/trapeze-area (fn [x] x) 0.0 0.0)) 0.0)
-    (is (= (lab2.task1/trapeze-area (fn [x] x) 1.0 1.0)) 0.0)
-    (is (= (lab2.task1/trapeze-area (fn [x] x) 0.0 1.0)) 0.5)
-    (is (= (lab2.task1/trapeze-area (fn [x] x) 0.0 2.0)) 1.0)
-    (is (= (lab2.task1/trapeze-area (fn [x] x) 1.0 3.0)) 1.0)
-    (is (= (lab2.task1/trapeze-area (fn [x] x) 0.0 100.0)) 50.0)))
+    (is (= (lab2.common/trapeze-area (fn [x] x) 0.0 0.0)) 0.0)
+    (is (= (lab2.common/trapeze-area (fn [x] x) 1.0 1.0)) 0.0)
+    (is (= (lab2.common/trapeze-area (fn [x] x) 0.0 1.0)) 0.5)
+    (is (= (lab2.common/trapeze-area (fn [x] x) 0.0 2.0)) 1.0)
+    (is (= (lab2.common/trapeze-area (fn [x] x) 1.0 3.0)) 1.0)
+    (is (= (lab2.common/trapeze-area (fn [x] x) 0.0 100.0)) 50.0)))
 
 (deftest sum-memoize-test
   (testing "sum-memoize"

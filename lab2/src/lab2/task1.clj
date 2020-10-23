@@ -1,7 +1,5 @@
-(ns lab2.task1)
-
-(defn trapeze-area [f a b]
-    (* (/ (+ (f a) (f b)) 2.0) (- b a)))
+(ns lab2.task1
+    (:use lab2.common))
 
 (def sum-memoize
     (memoize
