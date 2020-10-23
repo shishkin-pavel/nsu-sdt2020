@@ -1,11 +1,16 @@
 (ns lab1.task1)
 
+(defn wrap-char [xs]
+    (if (> (count xs) 0)
+        (cons (list (first xs)) (wrap-char (rest xs)))
+        xs))
+
 (defn add-char [c xs]
     (if (> (count xs) 0)
-        (if (= c (first xs))
+        (if (= c (first (first xs)))
             (add-char c (rest xs))
-            (concat
-                (list (list c (first xs)))
+            (cons
+                (cons c (first xs))
                 (add-char c (rest xs))))
         xs))
 
@@ -19,7 +24,7 @@
 (defn task1
     ([xs n] 
         (if (> n 0)
-            (task1 xs (dec n) xs)
+            (task1 xs (dec n) (wrap-char xs))
             (list)))
     ([xs n acc]
         (if (> n 0)
