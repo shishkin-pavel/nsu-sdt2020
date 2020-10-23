@@ -30,3 +30,14 @@
     (is (= (lab2.task1/task1 (fn [x] x) 2.5 10.0) 50.0))
     (is (= (lab2.task1/task1 (fn [x] x) 5.0 10.0) 50.0))
     (is (= (lab2.task1/task1 (fn [x] x) 7.0 10.0) 50.0))))
+
+(deftest task2-test
+  (testing "task2"
+    (is (= (lab2.task2/task2 (fn [x] x) 0.0 0.0) 0.0))
+    (is (= (lab2.task2/task2 (fn [x] x) 1.0 5.0) 12.5))
+    (is (= (lab2.task2/task2 (fn [x] x) 2.0 5.0) 12.5))
+    (is (= (lab2.task2/task2 (fn [x] x) 2.5 5.0) 12.5))
+    (is (= (lab2.task2/task2 (fn [x] x) 1.0 10.0) 50.0))
+    (is (= (lab2.task2/task2 (fn [x] x) 2.5 10.0) 50.0))
+    (is (= (lab2.task2/task2 (fn [x] x) 5.0 10.0) 50.0))
+    (is (= (lab2.task2/task2 (fn [x] x) 7.0 10.0) 50.0))))
