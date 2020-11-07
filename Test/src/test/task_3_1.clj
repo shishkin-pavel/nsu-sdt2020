@@ -17,5 +17,5 @@
   (f x))
 
 (defn -main [& _]
-  (println (time (count (doall (filter #(heavy-calc 1 even? %) (range 1000))))))
-  (println (time (count (my-parallel-filter #(heavy-calc 1 even? %) (get-bathes (range 1000) 100))))))
+  (time (doall (filter #(heavy-calc 1 even? %) (range 1000))))
+  (time (my-parallel-filter #(heavy-calc 1 even? %) (get-bathes (range 1000) 100))))
