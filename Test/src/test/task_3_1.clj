@@ -5,8 +5,7 @@
   (->> batches
        (map #(future (doall (filter pred %))))
        (doall)
-       (map deref)
-       (apply concat)
+       (mapcat deref)
        (doall)))
 
 (defn get-bathes [coll size]
@@ -17,5 +16,5 @@
   (f x))
 
 (defn -main [& _]
-  (time (doall (filter #(heavy-calc 1 even? %) (range 1000))))
-  (time (my-parallel-filter #(heavy-calc 1 even? %) (get-bathes (range 1000) 100))))
+  (time (doall (filter #(heavy-calc 100 even? %) (range 20))))
+  (time (my-parallel-filter #(heavy-calc 100 even? %) (get-bathes (range 20) 4))))
