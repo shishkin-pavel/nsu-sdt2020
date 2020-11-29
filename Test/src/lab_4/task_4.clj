@@ -132,3 +132,39 @@
       (cons (first expr) (map #(remove-negation %) (rest expr))))
 
     expr))
+
+(defn simplify [expr]
+  (cond
+    (disjunction? expr)
+    (apply disjunction (reduce #(if (disjunction? %2) (concat %1 (rest %2)) (cons %2 %1)) (cons '() (distinct (map simplify (rest expr))))))
+    (conjunction? expr)
+    (apply conjunction (reduce #(if (conjunction? %2) (concat %1 (rest %2)) (cons %2 %1)) (cons '() (distinct (map simplify (rest expr))))))
+    :else expr))
+
+(defn cartesian-product
+  [expr1 expr2]
+  (if (disjunction? expr1)
+    (if (disjunction? expr2)
+      (for [x (rest expr1) y (rest expr2)] (conjunction x y))
+      (for [x (rest expr1)] (conjunction x expr2)))
+    (if (disjunction? expr2)
+      (for [x (rest expr2)] (conjunction expr1 x))
+      (conjunction expr1 expr2))))
+
+(defn apply-distribution-law [expr]
+  "Apply distribution law to expression expr."
+  (cond
+    (disjunction? expr) (apply disjunction (map apply-distribution-law (rest expr)))
+    (conjunction? expr)
+    (let [args (map apply-distribution-law (rest expr))]
+      (reduce #(apply disjunction (cartesian-product %1 %2)) args))
+    :else expr))
+
+(defn build-dnf
+  "Build DNF from expression expr."
+  [expr] (->> expr
+              (complex-operations-to-basis)
+              (remove-negation)
+              (simplify)
+              (apply-distribution-law)
+              (simplify)))
