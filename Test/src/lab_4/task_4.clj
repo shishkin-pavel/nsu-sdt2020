@@ -49,6 +49,9 @@
 (defn base-operation? "Check if expr is base operation."
   [expr] (or (negation? expr) (disjunction? expr) (conjunction? expr)))
 
+(def extended-types
+  (atom (list)))
+
 (declare calculate)
 (declare complex-operations-to-basis)
 
@@ -168,3 +171,15 @@
               (simplify)
               (apply-distribution-law)
               (simplify)))
+
+(defn add-new-function
+  "add new logical function with prefix pre which is calculated by function def-function
+  and converts to basis operations by function convert-to-basis-func
+  def-func should take 3 args: expression, variable to replace, new value for replaced variable
+  convert-to-basis-func should take 1 arg: expression which will be converted to basis operations"
+  [pre def-func convert-to-basis-func]
+  (do
+    (swap! extended-types concat pre)
+    (swap! calc-func concat [[(fn [expr _ _] (= (first expr) pre)) def-func]])
+    (swap! convert-rules concat [[(fn [expr] (= (first expr) pre)) convert-to-basis-func]]))
+  true)
