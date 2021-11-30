@@ -29,7 +29,8 @@
 
   (do
     (log "before sending message")
-    (put! c "hello sent with callback" (fn [res] (log "message finally sent, result:" res))))
+    (put! c "hello sent with callback"
+          (fn [res] (log "message finally sent, result:" res))))
   (take! c (fn [msg] (log msg)))
 
 
@@ -53,7 +54,7 @@
   (future (log "got:" (takep c)))
 
 
-  (log "---------- почти то же самое уже есть в стандартной библиотеке: <!! & >!!")
+  (log "---------- то же самое в стандартной библиотеке: <!! & >!!")
   (future (log "done sending via standard lib function:" (>!! c "some msg")))
   (future (log "received:" (<!! c)))
 
@@ -172,9 +173,9 @@
   (def c (chan))
 
   (go (alt!
-        [[a "some message to a"]] ([_]     (log "sent message to a"))
+        [[a "some message to a"]] ([_]   (log "sent message to a"))
         [b c]                     ([msg] (log "received message from b or c:" msg))
-        (timeout 3000)            ([_]     (log :timed-out))))
+        (timeout 3000)            ([_]   (log :timed-out))))
 
   (go (log "a received:" (<! a)))
   (go (>! b "hi!"))
@@ -256,9 +257,11 @@
         :single-fork (let [[[side my-fork]] (vec forks)
                            not-my-fork-side (another [left right] side)]
                        (alt!
-                         not-my-fork-side ([fork]
-                                           (when fork
-                                             (recur :eating {side my-fork not-my-fork-side fork})))
+                         not-my-fork-side
+                         ([fork]
+                          (when fork
+                            (recur :eating {side my-fork not-my-fork-side fork})))
+
                          [[side my-fork]] ([_] (recur :thinking {}))))
         :eating (do
                   (<! (random-timeout 2000 3000))
@@ -270,7 +273,11 @@
           channels (mapv (fn [_] (chan)) names)]
       (dotimes [i (count names)]
         (put! (channels i) i))
-      (doall (map-indexed (fn [idx name] (philosopher name (channels idx) (channels (mod (inc idx) 5)))) names))
+      (doall (map-indexed
+              (fn [idx name]
+                (philosopher name
+                             (channels idx)
+                             (channels (mod (inc idx) 5)))) names))
       channels))
 
   (def p-ch (start-philosophers))
